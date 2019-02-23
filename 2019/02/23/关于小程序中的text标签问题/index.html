@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>归档：2019/1 | 隔壁老宋的博客</title>
+<title>关于小程序中的text标签问题 | 隔壁老宋的博客</title>
 
 
     <link rel="alternate" href="/atom.xml" title="隔壁老宋的博客" type="application/atom+xml">
@@ -113,184 +113,137 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <div id="main">
-     <div class="timebox">
-          <div class="timeline">
-              <ul>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="关于小程序中的text标签问题">
+            
+	            关于小程序中的text标签问题
+            
+        </h1>
+        <div class="post-meta">
+    
+        <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+            
+        </span>
+    
+
+    
+        <span class="fa-wrap">
+            <i class="fa fa-tags"></i>
+            <span class="tags-meta">
                 
-                
-                    
-                    
-                        
-                            
-                            <h2>2019</h2>
-                        
-                        
-                          <li class="hide">
-                        
-                            <h3>
-                              23<span>02月</span>
-                            </h3>
-                            <a href="/2019/02/23/关于小程序中的text标签问题/" title="关于小程序中的text标签问题" target="_blank">关于小程序中的text标签问题</a>
-                        </li>
-                    
-                
-                    
-                    
-                        
-                        
-                          <li class="">
-                        
-                            <h3>
-                              21<span>01月</span>
-                            </h3>
-                            <a href="/2019/01/21/关于小程序页面传值/" title="关于小程序页面传值" target="_blank">关于小程序页面传值</a>
-                        </li>
-                    
-                
-                    
-                    
-                        
-                        
-                          <li class="">
-                        
-                            <h3>
-                              21<span>01月</span>
-                            </h3>
-                            <a href="/2019/01/21/关于小程序setData/" title="关于小程序setData" target="_blank">关于小程序setData</a>
-                        </li>
-                    
-                
-                    
-                    
-                        
-                        
-                          <li class="">
-                        
-                            <h3>
-                              16<span>01月</span>
-                            </h3>
-                            <a href="/2019/01/16/IE兼容问题/" title="IE兼容问题" target="_blank">IE兼容问题</a>
-                        </li>
-                    
-                
-              </ul>
-          </div>
-    </div>
+            </span>
+        </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/02/23</span>
+        </span>
+        
+    
 </div>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h1 id="小程序text标签的各种坑"><a href="#小程序text标签的各种坑" class="headerlink" title="小程序text标签的各种坑"></a>小程序text标签的各种坑</h1><blockquote>
+<p>坑一：回车问题</p>
+</blockquote>
+<p>&ensp;&ensp;在小程序中，<em>text</em>标签会将回车也写入内容，导致空行。所以，如果在我们并不需要空行的情况下，<em>text</em>标签中的内容应当写在一行。</p>
+<blockquote>
+<p>坑二：font-size问题</p>
+</blockquote>
+<p>&ensp;&ensp;如果我们需要使用<em>view</em>标签来包裹<em>text</em>标签，在需要设置font-size属性时，应当给<em>view</em>标签使用，否则可能会出现<em>view</em>标签莫名其妙的变高一点的问题。</p>
+<blockquote>
+<p>坑三：首行缩进问题</p>
+</blockquote>
+<p>&ensp;&ensp;<em>text</em>标签使用首行缩进text-indent属性无效，解决方案：我们可以使用<em>view</em>标签来进行代替。</p>
+<blockquote>
+<p>vertical-align属性使用方法</p>
+</blockquote>
+<p>&ensp;&ensp;vertical-align是垂直居中属性，之前在使用vertical-align属性的过程中，发现竟然不起作用。原因是，使用vertical-align属性的有条件的（就是这么任性）。一个是使用环境：父元素必须设置line-height行高属性；一个是使用vertical-align属性的元素必须是行内块或者行内元素（块级元素不起作用！）。</p>
+
+    </div>
+    
+        <div class="reward" ontouchstart="">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/reward-wepay.jpg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2019/01/21/关于小程序页面传值/" class="next-post btn btn-default" title="关于小程序页面传值">
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">关于小程序页面传值</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMzA1MS85NjEz">
+  <script type="text/javascript">
+     (function(d, s) {
+         var j, e = d.getElementsByTagName(s)[0];
+         if (typeof LivereTower === 'function') { return; }
+         j = d.createElement(s);
+         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+         j.async = true;
+         e.parentNode.insertBefore(j, e);
+     })(document, 'script');
+  </script>
+</div>
+
+
+    </div>
+
+
 
 
 
                 </main>
                 
-                    
-    <aside class="col-md-4 sidebar">
-        
-        
+                    <aside id="article-toc" role="navigation" class="col-md-4">
     <div class="widget">
-        <h3 class="title">搜索</h3>
-        <div id="search-form">
-            <div id="result-mask" class="hide"></div>
-            <div class="search-area">
-                
-                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢？">
-                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
-                
-                
-            </div>
-            <div id="result-wrap" class="hide">
-                <div id="search-result"></div>
-            </div>
-            <div class="hide">
-                <template id="search-tpl">
-                    <div class="item">
-                        <a href="/{path}" title="{title}">
-                            <div class="title">{title}</div>
-                            <div class="content">{content}</div>
-                        </a>
-                    </div>
-                </template>
-            </div>
-        </div>
+        <h3 class="title">文章目录</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序text标签的各种坑"><span class="toc-text">小程序text标签的各种坑</span></a></li></ol>
+        
     </div>
-
-        
-        
-    <div class="widget">
-        <h3 class="title">网站公告</h3>
-        <div class="notification">
-            <p>
-    世人慌慌张张，不过图碎银几两
-</p>
-<p>
-    百年阳寿殆尽，终究难逃黄土里躺
-</p>
-        </div>
-    </div>
-
-        
-        
-    <div class="widget">
-      <h3 class="title">社交</h3> 
-        <div class="content social">
-            
-	            <a href="//github.com/CatchaOG" rel="external nofollow" title="Github" target="_blank">
-			    	<i class="git fa fa-git"></i>
-			    </a>
-            
-	            <a href="/" rel="external nofollow" title="邮箱" target="_blank">
-			    	<i class="envelope-o fa fa-envelope-o"></i>
-			    </a>
-            
-	            <a href="/" rel="external nofollow" title="联系QQ" target="_blank">
-			    	<i class="qq fa fa-qq"></i>
-			    </a>
-            
-	            <a href="/" rel="external nofollow" title="微信" target="_blank">
-			    	<i class="weixin fa fa-weixin"></i>
-			    </a>
-            
-	            <a href="/" rel="external nofollow" title="QQ群" target="_blank">
-			    	<i class="users fa fa-users"></i>
-			    </a>
-            
-	            <a href="/" rel="external nofollow" title="RSS" target="_blank">
-			    	<i class="feed fa fa-feed"></i>
-			    </a>
-            
-        </div>
-    </div>
-
-
-        
-        
-
-        
-        
-    <div class="widget">
-        <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/"><i class="fa" aria-hidden="true">2019年02月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">2019年01月</i></a><span class="archive-list-count">3</span></li></ul>
-    </div>
-
-
-        
-        
-
-        
-        
-    <div class="widget">
-        <h3 class="title">友链</h3>
-        <div class="content friends-link">
-        
-            <a href="https://hexo.io/zh-cn/" class="fa" target="_blank">Hexo官网</a>
-        
-        </div>
-    </div>
-
-
-        
-    </aside>
+</aside>
 
                 
             </div>
@@ -333,8 +286,6 @@
     </div>
 </div>
 
-
-	<script src="/js/search.js?rev=@@hash"></script>
 
 
 
