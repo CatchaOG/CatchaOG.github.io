@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>关于小程序中的text标签问题 | 隔壁老宋的博客</title>
+<title>实现深拷贝最简单的方法！ | 隔壁老宋的博客</title>
 
 
     <link rel="alternate" href="/atom.xml" title="隔壁老宋的博客" type="application/atom+xml">
@@ -117,9 +117,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="关于小程序中的text标签问题">
+        <h1 id="实现深拷贝最简单的方法！">
             
-	            关于小程序中的text标签问题
+	            实现深拷贝最简单的方法！
             
         </h1>
         <div class="post-meta">
@@ -153,23 +153,10 @@
     </div>
     
     <div class="post-body post-content">
-        <h1 id="小程序text标签的各种坑"><a href="#小程序text标签的各种坑" class="headerlink" title="小程序text标签的各种坑"></a>小程序text标签的各种坑</h1><blockquote>
-<p>坑一：回车问题</p>
+        <h1 id="实现深拷贝最简单的方法"><a href="#实现深拷贝最简单的方法" class="headerlink" title="实现深拷贝最简单的方法"></a>实现深拷贝最简单的方法</h1><blockquote>
+<p>直接上代码</p>
 </blockquote>
-<p>&ensp;&ensp;在小程序中，<em>text</em>标签会将回车也写入内容，导致空行。所以，如果在我们并不需要空行的情况下，<em>text</em>标签中的内容应当写在一行。</p>
-<blockquote>
-<p>坑二：font-size问题</p>
-</blockquote>
-<p>&ensp;&ensp;如果我们需要使用<em>view</em>标签来包裹<em>text</em>标签，在需要设置font-size属性时，应当给<em>view</em>标签使用，否则可能会出现<em>view</em>标签莫名其妙的变高一点的问题。</p>
-<blockquote>
-<p>坑三：首行缩进问题</p>
-</blockquote>
-<p>&ensp;&ensp;<em>text</em>标签使用首行缩进text-indent属性无效，解决方案：我们可以使用<em>view</em>标签来进行代替。</p>
-<blockquote>
-<p>vertical-align属性使用方法</p>
-</blockquote>
-<p>&ensp;&ensp;vertical-align是垂直居中属性，之前在使用vertical-align属性的过程中，发现竟然不起作用。原因是，使用vertical-align属性的有条件的（就是这么任性）。一个是使用环境：父元素必须设置line-height行高属性；一个是使用vertical-align属性的元素必须是行内块或者行内元素（块级元素不起作用！）。</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function deepCopy(obj) &#123;</span><br><span class="line"></span><br><span class="line">          let _obj = JSON.stringify(obj);</span><br><span class="line">          let objClone = JSON.parse(_obj);</span><br><span class="line"></span><br><span class="line">          return objClone</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      let arr = [0, 1, 2],</span><br><span class="line">          arrClone = deepCopy(arr)</span><br><span class="line">          arrClone[1] = 2</span><br><span class="line">      console.log(arr)</span><br><span class="line">      console.log(arrClone)</span><br></pre></td></tr></table></figure>
     </div>
     
         <div class="reward" ontouchstart="">
@@ -202,15 +189,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/02/23/实现深拷贝最简单的方法！/" class="pre-post btn btn-default" title="实现深拷贝最简单的方法！">
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">实现深拷贝最简单的方法！</span>
-        </a>
     
-    
-        <a href="/2019/01/21/关于小程序页面传值/" class="next-post btn btn-default" title="关于小程序页面传值">
+        <a href="/2019/02/23/关于小程序中的text标签问题/" class="next-post btn btn-default" title="关于小程序中的text标签问题">
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">关于小程序页面传值</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">关于小程序中的text标签问题</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
@@ -245,7 +227,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序text标签的各种坑"><span class="toc-text">小程序text标签的各种坑</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实现深拷贝最简单的方法"><span class="toc-text">实现深拷贝最简单的方法</span></a></li></ol>
         
     </div>
 </aside>
