@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>调起小程序导航 | 隔壁老宋的博客</title>
+<title>关于小程序的组件及传值 | 隔壁老宋的博客</title>
 
 
     <link rel="alternate" href="/atom.xml" title="隔壁老宋的博客" type="application/atom+xml">
@@ -117,9 +117,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="调起小程序导航">
+        <h1 id="关于小程序的组件及传值">
             
-	            调起小程序导航
+	            关于小程序的组件及传值
             
         </h1>
         <div class="post-meta">
@@ -143,7 +143,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2019/07/16</span>
+            <span class="date-meta">2019/07/18</span>
         </span>
         
     
@@ -153,15 +153,30 @@
     </div>
     
     <div class="post-body post-content">
-        <h1 id="调起小程序导航"><a href="#调起小程序导航" class="headerlink" title="调起小程序导航"></a>调起小程序导航</h1><p>ps:首先需要用户授权地理位置。（如果用户拒绝，可以通过弹窗，点击进入getsetting，强制获取授权，否则无法进入小程序）</p>
-<blockquote>
-<p>直接上代码</p>
+        <h1 id="小程序创建组件及组件传值"><a href="#小程序创建组件及组件传值" class="headerlink" title="小程序创建组件及组件传值"></a>小程序创建组件及组件传值</h1><blockquote>
+<p>父组件JSON配置组件名称</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">wx.getLocation(&#123;//获取当前经纬度</span><br><span class="line">      type: &apos;wgs84&apos;, //返回可以用于wx.openLocation的经纬度，官方提示bug: iOS 6.3.30 type 参数不生效，只会返回 wgs84 类型的坐标信息  </span><br><span class="line">      success: function (res) &#123;</span><br><span class="line">        wx.openLocation(&#123;//​使用微信内置地图查看位置。</span><br><span class="line">          latitude: 22.5542080000,//要去的纬度-地址</span><br><span class="line">          longitude: 113.8878770000,//要去的经度-地址</span><br><span class="line">          name: &quot;宝安中心A地铁口&quot;,</span><br><span class="line">          address:&apos;宝安中心A地铁口&apos;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 父组件JSON（JSON文件中不能写注释，这里只是为了表达清楚）</span><br><span class="line">&#123;</span><br><span class="line">  &quot;navigationBarTitleText&quot;: &quot;父子传值&quot;,</span><br><span class="line">  &quot;usingComponents&quot;: &#123;</span><br><span class="line">    &quot;temp&quot;: &quot;../../components/son/son&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>效果图如下</p>
+<p>父组件传值到子组件</p>
 </blockquote>
-<p><img src="/img/map.png" alt="markdown"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 父组件 需要传值的数据</span><br><span class="line">	Page(&#123;</span><br><span class="line">		data:&#123;</span><br><span class="line">			id:&apos;1&apos;,</span><br><span class="line">		&#125;,</span><br><span class="line"></span><br><span class="line">		onLoad: function(option)&#123;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>父组件HTML</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!-- 父组件A wxml --&gt;</span><br><span class="line">&lt;!-- 这里的temp标签就是子组件的文件名，也是父组件JSON里配置的组件名称 --&gt;</span><br><span class="line">&lt;!-- 这里的theId是子组件接受数据的名字，id则是父组件需要传过去的数据--&gt;</span><br><span class="line">&lt;view&gt;</span><br><span class="line">  &lt;temp theId=&apos;&#123;&#123;id&#125;&#125;&apos;&gt;&lt;/temp&gt;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>子组件JSON配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 组件需要将component属性设置为true</span><br><span class="line">&#123;</span><br><span class="line">  &quot;component&quot;: true,</span><br><span class="line">  &quot;usingComponents&quot;: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>子组件接收父组件传值</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//子组件JS</span><br><span class="line">Component(&#123;</span><br><span class="line">  //在这里接收与data类似可以直接在wxml上用</span><br><span class="line">  properties: &#123;</span><br><span class="line">    theId: &#123;</span><br><span class="line">	//声明父组件传过来的数据类型</span><br><span class="line">      type: String,//类型</span><br><span class="line">	  //如果需要默认值（初始值）的话可以通过value属性设置</span><br><span class="line">      value: &apos;0&apos;//默认值</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data: &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>子组件使用接收的数据</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 子组件  wxml --&gt;</span><br><span class="line">&lt;view class=&quot;inner&quot;&gt;</span><br><span class="line">  &#123;&#123;theId&#125;&#125;</span><br><span class="line">&lt;/view&gt;</span><br></pre></td></tr></table></figure>
 
     </div>
     
@@ -195,15 +210,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/07/18/关于小程序的组件及传值/" class="pre-post btn btn-default" title="关于小程序的组件及传值">
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">关于小程序的组件及传值</span>
-        </a>
     
-    
-        <a href="/2019/02/23/实现深拷贝最简单的方法！/" class="next-post btn btn-default" title="实现深拷贝最简单的方法！">
+        <a href="/2019/07/16/调起小程序导航/" class="next-post btn btn-default" title="调起小程序导航">
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">实现深拷贝最简单的方法！</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">调起小程序导航</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
@@ -238,7 +248,7 @@
     <div class="widget">
         <h3 class="title">文章目录</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#调起小程序导航"><span class="toc-text">调起小程序导航</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#小程序创建组件及组件传值"><span class="toc-text">小程序创建组件及组件传值</span></a></li></ol>
         
     </div>
 </aside>
