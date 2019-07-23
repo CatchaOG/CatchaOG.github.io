@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>关于小程序处理时间格式真机显示NAN的问题 | 隔壁老宋的博客</title>
+<title>关于小程序版本自动更新 | 隔壁老宋的博客</title>
 
 
     <link rel="alternate" href="/atom.xml" title="隔壁老宋的博客" type="application/atom+xml">
@@ -117,9 +117,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="关于小程序处理时间格式真机显示NAN的问题">
+        <h1 id="关于小程序版本自动更新">
             
-	            关于小程序处理时间格式真机显示NAN的问题
+	            关于小程序版本自动更新
             
         </h1>
         <div class="post-meta">
@@ -143,7 +143,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2019/07/22</span>
+            <span class="date-meta">2019/07/23</span>
         </span>
         
     
@@ -154,12 +154,11 @@
     
     <div class="post-body post-content">
         <blockquote>
-<p>开发小程序处理时间格式时遇到在开发者工具中显示正常时间格式，在真机中却显示NAN的问题</p>
+<p>小程序版本更新问题</p>
 </blockquote>
-<p>一开始发现这个问题感觉非常莫名其妙，而且神奇的是用手机预览时显示NAN，真机调试却能够显示正常，最后发现是因为ios设备不支持new Date(time)的这个time格式为yyyy-mm-dd,必须要转换成yyyy/mm/dd这种格式</p>
-<p>所以以下代码处理这个问题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let date = &apos;2019-01-02 10:58:14&apos;;</span><br><span class="line">date.replace(new RegExp(&apos;-&apos;,&apos;g&apos;), &apos;/&apos;);</span><br><span class="line"></span><br><span class="line">date = date ? new Date(date) : new Date();</span><br><span class="line">const year = date.getFullYear();</span><br><span class="line">// 月份是从零开始的 所以要+1</span><br><span class="line">const mounth = date.getMonth() + 1).toString().padStart(2, &apos;0&apos;);</span><br><span class="line">const day = date.getDate().toString().padStart(2, &apos;0&apos;);</span><br></pre></td></tr></table></figure>
-<pre><code>ES2017 引入了字符串补全长度的功能。如果某个字符串不够指定长度，会在头部或尾部补全。padStart()用于头部补全，padEnd()用于尾部补全，padStart(字符串长度，&apos;补全的内容&apos;)
+<p>今天小程序的新版本通过审核了，但是当我打开小程序的时候还是旧版本。好吧，我把旧版删掉清除缓存，重新搜索，打开小程序。em。。。我尼玛还是旧版？！我关掉微信，甚至重启手机，没卵用。为了避免这种情况，我加上了版本检测自动更新机制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 检测当前的小程序</span><br><span class="line"> * 是否是最新版本，是否需要下载、更新</span><br><span class="line"> */</span><br><span class="line">function checkUpdateVersion() &#123;</span><br><span class="line">  //创建 UpdateManager 实例</span><br><span class="line">  const updateManager = wx.getUpdateManager();</span><br><span class="line">  //检测版本更新</span><br><span class="line">  updateManager.onCheckForUpdate(function(res) &#123;</span><br><span class="line">    // 请求完新版本信息的回调</span><br><span class="line">    if (res.hasUpdate) &#123;</span><br><span class="line">      //监听小程序有版本更新事件</span><br><span class="line">      updateManager.onUpdateReady(function() &#123;</span><br><span class="line">        wx.showModal(&#123;</span><br><span class="line">          title: &apos;更新提示&apos;,</span><br><span class="line">          content: &apos;新版本已经准备好，是否重启应用？&apos;,</span><br><span class="line">          success(res) &#123;</span><br><span class="line">            if (res.confirm) &#123;</span><br><span class="line">              // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启</span><br><span class="line">              updateManager.applyUpdate();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      updateManager.onUpdateFailed(function() &#123;</span><br><span class="line">        // 新版本下载失败</span><br><span class="line">        wx.showModal(&#123;</span><br><span class="line">          title: &apos;已经有新版本咯~&apos;,</span><br><span class="line">          content: &apos;请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索打开呦~&apos;,</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>根据小程序的运行机制，适合在启动时就进行版本检测的操作
 </code></pre>
     </div>
     
@@ -193,15 +192,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/07/23/关于小程序版本自动更新/" class="pre-post btn btn-default" title="关于小程序版本自动更新">
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">关于小程序版本自动更新</span>
-        </a>
     
-    
-        <a href="/2019/07/18/小程序组件传值-子传父/" class="next-post btn btn-default" title="小程序组件传值-子传父">
+        <a href="/2019/07/22/关于小程序处理时间格式真机显示NAN的问题/" class="next-post btn btn-default" title="关于小程序处理时间格式真机显示NAN的问题">
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">小程序组件传值-子传父</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">关于小程序处理时间格式真机显示NAN的问题</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
